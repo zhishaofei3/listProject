@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="tip">{{tip}}</div>
     <Item v-for="item in articleVos" :item="item" :key="item.id"></Item>
   </div>
 </template>
@@ -50,7 +51,8 @@ export default {
         }
       ],
       id: 96334,
-      isLoading: false
+      isLoading: false,
+      tip: '',
     }
   },
   methods: {
@@ -79,12 +81,13 @@ export default {
       if(window.pageYOffset + window.innerHeight >= document.documentElement.scrollHeight - 100) { //检测是否到底部
         if(!this.isLoading) {
           this.isLoading = true
+          this.tip = '加载中……'
           this.requestNewItem()
         }
       }
     },
     getItemById(id) {
-      return this.articleVos.filter((item) => {
+      return this.articleVos.filter(item => {
         return item.id == id
       })[0]
     },
@@ -101,11 +104,11 @@ export default {
             content: '<img src="http://p2.ifengimg.com/a/2018_14/dd88b8f53bf4037.jpg"><div class="tags"><a style="left: 10%; top: 20%;"></a><a style="left: 80%; top: 50%;"></a><a style="left: 40%; top: 40%;"></a></div>',
           }
         ]
-        for(let i in data) {
-          let item = data[i]
+        data.forEach(item => {
           item.id = ++this.id
           this.articleVos.push(item)
-        }
+        })
+        this.tip = ''
         this.isLoading = false
       }, 1000) // 模拟ajax
     }
@@ -124,5 +127,14 @@ export default {
 body {
   margin: 0;
   padding: 0;
+}
+
+.tip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  font-size: 20px;
+  color: #FFF;
 }
 </style>
