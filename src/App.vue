@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Item v-for="item in articleVos" :item="item" :key="item.id" @onItemShow="onItemShow"></Item>
+    <Item v-for="item in articleVos" :item="item" :key="item.id"></Item>
   </div>
 </template>
 
