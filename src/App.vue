@@ -129,6 +129,10 @@ body {
   padding: 0;
 }
 
+img {
+  display: block;
+}
+
 .tip {
   position: fixed;
   left: 0;
